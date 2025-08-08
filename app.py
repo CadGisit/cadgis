@@ -49,10 +49,12 @@ def index():
 @app.route('/ponte/<int:n_ponte>')
 def dettaglio_ponte(n_ponte):
     """Mostra i dettagli di un singolo ponte in una maschera con tab."""
+    conn = None
     try:
         conn = get_db_connection()
-        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        # Explicitly list all columns to avoid issues with problematic data types from SELECT *
+        # WORKAROUND: Use a standard cursor instead of RealDictCursor to bypass a suspected bug.
+        cur = conn.cursor()
+
         query = """
             SELECT
                 n_ponte, codice_iop, nome_ponte, comune, codice_istat, altri_comuni_confinanti,
@@ -79,20 +81,26 @@ def dettaglio_ponte(n_ponte):
             FROM prv_vb_ponti_view WHERE n_ponte = %s
         """
         cur.execute(query, (n_ponte,))
-        ponte = cur.fetchone()
-        cur.close()
-        conn.close()
 
-        if ponte is None:
+        # Manually build the dictionary
+        ponte_tuple = cur.fetchone()
+        if ponte_tuple is None:
             return "Ponte non trovato", 404
+
+        colnames = [desc[0] for desc in cur.description]
+        ponte = dict(zip(colnames, ponte_tuple))
+
+        cur.close()
 
         return render_template('dettaglio_ponte.html', ponte=ponte)
     except Exception as e:
-        # Return a more detailed error message for debugging
         error_type = type(e).__name__
         error_msg = str(e)
-        print(f"ERRORE DIAGNOSTICO in dettaglio_ponte: Tipo={error_type}, Messaggio={error_msg}", file=sys.stderr)
-        return f"<h1>Errore per Debug</h1><p>Per favore, invia questo messaggio all'assistente.</p><p><b>Tipo di Errore:</b> {error_type}</p><p><b>Messaggio:</b> {error_msg}</p>", 500
+        print(f"ERRORE in dettaglio_ponte: Tipo={error_type}, Messaggio={error_msg}", file=sys.stderr)
+        return f"<h1>Errore di Database</h1><p>Impossibile recuperare i dettagli del ponte. Dettagli: {error_type} - {error_msg}</p>", 500
+    finally:
+        if conn is not None:
+            conn.close()
 
 if __name__ == '__main__':
     # Run the app on 0.0.0.0 to make it accessible on the local network
