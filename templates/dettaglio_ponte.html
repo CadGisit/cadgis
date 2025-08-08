@@ -151,17 +151,25 @@
             <!-- Inquadramento -->
             <div class="tab-pane fade" id="inquadramento" role="tabpanel">
                 {% if ponte.link_google_maps %}
-                    <iframe src="{{ ponte.link_google_maps }}"></iframe>
+                    <p>
+                        <a href="{{ ponte.link_google_maps }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            Apri Google Maps in una nuova scheda
+                        </a>
+                    </p>
                 {% else %}
-                    <p>Link a Google Maps non disponibile.</p>
+                    <p class="text-muted">Link a Google Maps non disponibile.</p>
                 {% endif %}
             </div>
             <!-- StreetView -->
             <div class="tab-pane fade" id="streetview" role="tabpanel">
                 {% if ponte.link_streetview %}
-                    <iframe src="{{ ponte.link_streetview }}"></iframe>
+                     <p>
+                        <a href="{{ ponte.link_streetview }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            Apri Street View in una nuova scheda
+                        </a>
+                    </p>
                 {% else %}
-                    <p>Link a StreetView non disponibile.</p>
+                    <p class="text-muted">Link a StreetView non disponibile.</p>
                 {% endif %}
             </div>
         </div>
