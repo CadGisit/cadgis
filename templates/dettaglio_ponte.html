@@ -141,12 +141,12 @@
             <div class="tab-pane fade" id="foto" role="tabpanel">
                 <p><strong>Path Lizmap:</strong> {{ ponte.foto_path_lizmap }}</p>
                 <p><strong>Path Foto:</strong> {{ ponte.foto_path }}</p>
-                <!--
+                {#
                 NOTA: Per visualizzare le immagini, i percorsi sopra devono essere accessibili dal web.
                 Se sono percorsi di file locali sul server, è necessario servirli tramite una route Flask
                 e costruire l'URL appropriato qui. Ad esempio:
-                <img src="{{ url_for('static', filename='immagini_ponti/' + ponte.n_ponte + '.jpg') }}" alt="Foto del ponte">
-                -->
+                <img src="{{ url_for('static', filename='immagini_ponti/' ~ ponte.n_ponte ~ '.jpg') }}" alt="Foto del ponte">
+                #}
             </div>
             <!-- Inquadramento -->
             <div class="tab-pane fade" id="inquadramento" role="tabpanel">
