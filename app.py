@@ -46,7 +46,7 @@ def index():
         print(f"Errore in index: {e}", file=sys.stderr)
         return f"<h1>Errore di Database</h1><p>Impossibile recuperare i dati dei ponti. Dettagli: {e}</p>", 500
 
-@app.route('/ponte/<n_ponte>')
+@app.route('/ponte/<int:n_ponte>')
 def dettaglio_ponte(n_ponte):
     """Mostra i dettagli di un singolo ponte in una maschera con tab."""
     try:
