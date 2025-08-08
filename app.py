@@ -6,11 +6,11 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Database connection details
-DB_HOST = "192.168.1.7"
+DB_HOST = "192.168.1.1"
 DB_PORT = "5432"
-DB_NAME = "sitdb"
-DB_USER = "lizmap"
-DB_PASS = "publ1sh"
+DB_NAME = "xnomedatabasex"
+DB_USER = "xnomeutentex"
+DB_PASS = "xpasswordutentex"
 
 def get_db_connection():
     """Establishes a connection to the database."""
