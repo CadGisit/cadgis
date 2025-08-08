@@ -52,7 +52,33 @@ def dettaglio_ponte(n_ponte):
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        cur.execute("SELECT * FROM prv_vb_ponti_view WHERE n_ponte = %s", (n_ponte,))
+        # Explicitly list all columns to avoid issues with problematic data types from SELECT *
+        query = """
+            SELECT
+                n_ponte, codice_iop, nome_ponte, comune, codice_istat, altri_comuni_confinanti,
+                localita, tipo_sp, n_sp, nome_sp, progressiva_centro_km_m,
+                progressiva_inizio_km_m, progressiva_fine_km_m, coord_x_epsg4326_centro,
+                coord_y_epsg4326_centro, quota_centro, classificazione, tipo_collegamento,
+                tipo_attraversamento, n_carreggiate, n_corsie, luce_estesa_inferiore_6_metri,
+                luce_estesa, luce_campata_max, lungh_totale, largh_carreggiata,
+                largh_fuori_tutto, n_campate, tracciato_ponte, tipologia_strutturale,
+                tipologia_strutturale_voce_altro, tipologia_spalla_iniziale,
+                tipologia_spalla_finale, pile_materiale_costruttivo,
+                pile_materiale_costruttivo_voce_altro, pile_altezza_m, pile_geometria_sezione,
+                pile_n_fondazioni, impalcato_materiale_costruttivo,
+                impalcato_materiale_costruttivo_voce_altro, impalcato_tipologia_soletta,
+                impalcato_tipologia_soletta_voce_altro, classificazione_uso_stradale,
+                distretto, proprietario, classificazione_sismica_2025,
+                sismicita_area_ag_g_tr475, classi_conseguenza, prp_2004,
+                psda_rischio_idraulico, pai_rischio_frane, n_ispezioni_effettuate,
+                data_ultima_ispezione, stato_opera, fenomeni_erosivi, fenomeni_franosi,
+                morfologia_sito, tipologia_giunti, n_totale_giunti, lungh_giunto_spalla,
+                lungh_giunto_pila, apparecchi_di_appoggio, interventi_strutturali_eseguiti,
+                descrizione_interventi_strutturali, limitazione_di_carico, foto_path_lizmap,
+                foto_path, link_google_maps, link_streetview
+            FROM prv_vb_ponti_view WHERE n_ponte = %s
+        """
+        cur.execute(query, (n_ponte,))
         ponte = cur.fetchone()
         cur.close()
         conn.close()
