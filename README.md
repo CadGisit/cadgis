@@ -39,11 +39,11 @@ Le impostazioni per la connessione al database si trovano all'inizio del file `a
 
 ```python
 # Database connection details
-DB_HOST = "192.168.1.7"
+DB_HOST = "192.168.1.1"
 DB_PORT = "5432"
-DB_NAME = "sitdb"
-DB_USER = "lizmap"
-DB_PASS = "publ1sh"
+DB_NAME = "xnomedatabasex"
+DB_USER = "xnomeutentex"
+DB_PASS = "xpasswordutentex"
 ```
 
 ## Esecuzione
