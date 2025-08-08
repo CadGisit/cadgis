@@ -88,8 +88,11 @@ def dettaglio_ponte(n_ponte):
 
         return render_template('dettaglio_ponte.html', ponte=ponte)
     except Exception as e:
-        print(f"Errore in dettaglio_ponte: {e}", file=sys.stderr)
-        return f"<h1>Errore di Database</h1><p>Impossibile recuperare i dettagli del ponte. Dettagli: {e}</p>", 500
+        # Return a more detailed error message for debugging
+        error_type = type(e).__name__
+        error_msg = str(e)
+        print(f"ERRORE DIAGNOSTICO in dettaglio_ponte: Tipo={error_type}, Messaggio={error_msg}", file=sys.stderr)
+        return f"<h1>Errore per Debug</h1><p>Per favore, invia questo messaggio all'assistente.</p><p><b>Tipo di Errore:</b> {error_type}</p><p><b>Messaggio:</b> {error_msg}</p>", 500
 
 if __name__ == '__main__':
     # Run the app on 0.0.0.0 to make it accessible on the local network
