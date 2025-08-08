@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizzatore Ponti</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        #pontiTable tbody tr {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Elenco Ponti</h1>
+        <p>Clicca su una riga per vedere i dettagli del ponte.</p>
+        <table id="pontiTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>N. Ponte</th>
+                    <th>Codice IOP</th>
+                    <th>Nome Ponte</th>
+                    <th>Comune</th>
+                    <th>Codice ISTAT</th>
+                    <th>Altri Comuni</th>
+                    <th>Località</th>
+                    <th>Tipo SP</th>
+                    <th>N. SP</th>
+                    <th>Nome SP</th>
+                    <th>Prog. Centro</th>
+                    <th>Prog. Inizio</th>
+                    <th>Prog. Fine</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ponte in ponti %}
+                <tr data-href="{{ url_for('dettaglio_ponte', n_ponte=ponte.n_ponte) }}">
+                    <td>{{ ponte.n_ponte }}</td>
+                    <td>{{ ponte.codice_iop }}</td>
+                    <td>{{ ponte.nome_ponte }}</td>
+                    <td>{{ ponte.comune }}</td>
+                    <td>{{ ponte.codice_istat }}</td>
+                    <td>{{ ponte.altri_comuni_confinanti }}</td>
+                    <td>{{ ponte.localita }}</td>
+                    <td>{{ ponte.tipo_sp }}</td>
+                    <td>{{ ponte.n_sp }}</td>
+                    <td>{{ ponte.nome_sp }}</td>
+                    <td>{{ ponte.progressiva_centro_km_m }}</td>
+                    <td>{{ ponte.progressiva_inizio_km_m }}</td>
+                    <td>{{ ponte.progressiva_fine_km_m }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <!-- Bootstrap JS (optional, for some styling) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            var table = $('#pontiTable').DataTable({
+                "pageLength": 25 // Show 25 entries by default
+            });
+
+            // Handle row clicks
+            $('#pontiTable tbody').on('click', 'tr', function () {
+                var href = $(this).data('href');
+                if(href){
+                    window.location.href = href;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

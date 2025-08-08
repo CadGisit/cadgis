@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Ponte: {{ ponte.nome_ponte }}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; }
+        .tab-content { border: 1px solid #dee2e6; border-top: none; padding: 15px; }
+        .key { font-weight: bold; }
+        iframe { width: 100%; height: 600px; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Dettaglio Ponte: {{ ponte.nome_ponte }}</h1>
+        <a href="{{ url_for('index') }}" class="btn btn-primary mb-3">Torna alla Tabella</a>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="ponteTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="generale-tab" data-toggle="tab" href="#generale" role="tab">Generale</a></li>
+            <li class="nav-item"><a class="nav-link" id="coordinate-tab" data-toggle="tab" href="#coordinate" role="tab">Coordinate</a></li>
+            <li class="nav-item"><a class="nav-link" id="classificazione-tab" data-toggle="tab" href="#classificazione" role="tab">Classificazione</a></li>
+            <li class="nav-item"><a class="nav-link" id="dati-metrici-tab" data-toggle="tab" href="#dati-metrici" role="tab">Dati Metrici</a></li>
+            <li class="nav-item"><a class="nav-link" id="geometria-tab" data-toggle="tab" href="#geometria" role="tab">Geometria</a></li>
+            <li class="nav-item"><a class="nav-link" id="proprieta-tab" data-toggle="tab" href="#proprieta" role="tab">Proprietà</a></li>
+            <li class="nav-item"><a class="nav-link" id="vincoli-tab" data-toggle="tab" href="#vincoli" role="tab">Vincoli</a></li>
+            <li class="nav-item"><a class="nav-link" id="ispezioni-tab" data-toggle="tab" href="#ispezioni" role="tab">Ispezioni</a></li>
+            <li class="nav-item"><a class="nav-link" id="morfologia-tab" data-toggle="tab" href="#morfologia" role="tab">Morfologia</a></li>
+            <li class="nav-item"><a class="nav-link" id="appoggi-tab" data-toggle="tab" href="#appoggi" role="tab">Appoggi</a></li>
+            <li class="nav-item"><a class="nav-link" id="interventi-tab" data-toggle="tab" href="#interventi" role="tab">Interventi</a></li>
+            <li class="nav-item"><a class="nav-link" id="foto-tab" data-toggle="tab" href="#foto" role="tab">Foto</a></li>
+            <li class="nav-item"><a class="nav-link" id="inquadramento-tab" data-toggle="tab" href="#inquadramento" role="tab">Inquadramento</a></li>
+            <li class="nav-item"><a class="nav-link" id="streetview-tab" data-toggle="tab" href="#streetview" role="tab">StreetView</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content" id="ponteTabContent">
+            <!-- Generale -->
+            <div class="tab-pane fade show active" id="generale" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">N. Ponte:</div><div class="col-md-9">{{ ponte.n_ponte }}</div></div>
+                <div class="row"><div class="col-md-3 key">Codice IOP:</div><div class="col-md-9">{{ ponte.codice_iop }}</div></div>
+                <div class="row"><div class="col-md-3 key">Nome Ponte:</div><div class="col-md-9">{{ ponte.nome_ponte }}</div></div>
+                <div class="row"><div class="col-md-3 key">Comune:</div><div class="col-md-9">{{ ponte.comune }}</div></div>
+                <div class="row"><div class="col-md-3 key">Codice ISTAT:</div><div class="col-md-9">{{ ponte.codice_istat }}</div></div>
+                <div class="row"><div class="col-md-3 key">Altri Comuni Confinanti:</div><div class="col-md-9">{{ ponte.altri_comuni_confinanti }}</div></div>
+                <div class="row"><div class="col-md-3 key">Località:</div><div class="col-md-9">{{ ponte.localita }}</div></div>
+                <div class="row"><div class="col-md-3 key">Tipo SP:</div><div class="col-md-9">{{ ponte.tipo_sp }}</div></div>
+                <div class="row"><div class="col-md-3 key">N. SP:</div><div class="col-md-9">{{ ponte.n_sp }}</div></div>
+                <div class="row"><div class="col-md-3 key">Nome SP:</div><div class="col-md-9">{{ ponte.nome_sp }}</div></div>
+                <div class="row"><div class="col-md-3 key">Progressiva Centro (km):</div><div class="col-md-9">{{ ponte.progressiva_centro_km_m }}</div></div>
+                <div class="row"><div class="col-md-3 key">Progressiva Inizio (km):</div><div class="col-md-9">{{ ponte.progressiva_inizio_km_m }}</div></div>
+                <div class="row"><div class="col-md-3 key">Progressiva Fine (km):</div><div class="col-md-9">{{ ponte.progressiva_fine_km_m }}</div></div>
+            </div>
+            <!-- Coordinate -->
+            <div class="tab-pane fade" id="coordinate" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Coord. X EPSG:4326 Centro:</div><div class="col-md-9">{{ ponte.coord_x_epsg4326_centro }}</div></div>
+                <div class="row"><div class="col-md-3 key">Coord. Y EPSG:4326 Centro:</div><div class="col-md-9">{{ ponte.coord_y_epsg4326_centro }}</div></div>
+                <div class="row"><div class="col-md-3 key">Quota Centro:</div><div class="col-md-9">{{ ponte.quota_centro }}</div></div>
+            </div>
+            <!-- Classificazione -->
+            <div class="tab-pane fade" id="classificazione" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Classificazione:</div><div class="col-md-9">{{ ponte.classificazione }}</div></div>
+                <div class="row"><div class="col-md-3 key">Tipo Collegamento:</div><div class="col-md-9">{{ ponte.tipo_collegamento }}</div></div>
+                <div class="row"><div class="col-md-3 key">Tipo Attraversamento:</div><div class="col-md-9">{{ ponte.tipo_attraversamento }}</div></div>
+                <div class="row"><div class="col-md-3 key">N. Carreggiate:</div><div class="col-md-9">{{ ponte.n_carreggiate }}</div></div>
+                <div class="row"><div class="col-md-3 key">N. Corsie:</div><div class="col-md-9">{{ ponte.n_corsie }}</div></div>
+            </div>
+            <!-- Dati Metrici -->
+            <div class="tab-pane fade" id="dati-metrici" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Luce < 6m:</div><div class="col-md-9">{{ ponte.luce_estesa_inferiore_6_metri }}</div></div>
+                <div class="row"><div class="col-md-3 key">Luce Estesa:</div><div class="col-md-9">{{ ponte.luce_estesa }}</div></div>
+                <div class="row"><div class="col-md-3 key">Luce Campata Max:</div><div class="col-md-9">{{ ponte.luce_campata_max }}</div></div>
+                <div class="row"><div class="col-md-3 key">Lunghezza Totale:</div><div class="col-md-9">{{ ponte.lungh_totale }}</div></div>
+                <div class="row"><div class="col-md-3 key">Larghezza Carreggiata:</div><div class="col-md-9">{{ ponte.largh_carreggiata }}</div></div>
+                <div class="row"><div class="col-md-3 key">Larghezza Fuori Tutto:</div><div class="col-md-9">{{ ponte.largh_fuori_tutto }}</div></div>
+                <div class="row"><div class="col-md-3 key">N. Campate:</div><div class="col-md-9">{{ ponte.n_campate }}</div></div>
+                <div class="row"><div class="col-md-3 key">Tracciato Ponte:</div><div class="col-md-9">{{ ponte.tracciato_ponte }}</div></div>
+            </div>
+            <!-- Geometria -->
+            <div class="tab-pane fade" id="geometria" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Tipologia Strutturale:</div><div class="col-md-9">{{ ponte.tipologia_strutturale }}</div></div>
+                <div class="row"><div class="col-md-3 key">Voce Altro:</div><div class="col-md-9">{{ ponte.tipologia_strutturale_voce_altro }}</div></div>
+                <div class="row"><div class="col-md-3 key">Tipologia Spalla Iniziale:</div><div class="col-md-9">{{ ponte.tipologia_spalla_iniziale }}</div></div>
+                <div class="row"><div class="col-md-3 key">Tipologia Spalla Finale:</div><div class="col-md-9">{{ ponte.tipologia_spalla_finale }}</div></div>
+                <div class="row"><div class="col-md-3 key">Pile Materiale:</div><div class="col-md-9">{{ ponte.pile_materiale_costruttivo }}</div></div>
+                <div class="row"><div class="col-md-3 key">Voce Altro:</div><div class="col-md-9">{{ ponte.pile_materiale_costruttivo_voce_altro }}</div></div>
+                <div class="row"><div class="col-md-3 key">Pile Altezza (m):</div><div class="col-md-9">{{ ponte.pile_altezza_m }}</div></div>
+                <div class="row"><div class="col-md-3 key">Pile Geometria Sezione:</div><div class="col-md-9">{{ ponte.pile_geometria_sezione }}</div></div>
+                <div class="row"><div class="col-md-3 key">Pile N. Fondazioni:</div><div class="col-md-9">{{ ponte.pile_n_fondazioni }}</div></div>
+                <div class="row"><div class="col-md-3 key">Impalcato Materiale:</div><div class="col-md-9">{{ ponte.impalcato_materiale_costruttivo }}</div></div>
+                <div class="row"><div class="col-md-3 key">Voce Altro:</div><div class="col-md-9">{{ ponte.impalcato_materiale_costruttivo_voce_altro }}</div></div>
+                <div class="row"><div class="col-md-3 key">Impalcato Tipologia Soletta:</div><div class="col-md-9">{{ ponte.impalcato_tipologia_soletta }}</div></div>
+                <div class="row"><div class="col-md-3 key">Voce Altro:</div><div class="col-md-9">{{ ponte.impalcato_tipologia_soletta_voce_altro }}</div></div>
+            </div>
+            <!-- Proprietà -->
+            <div class="tab-pane fade" id="proprieta" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Uso Stradale:</div><div class="col-md-9">{{ ponte.classificazione_uso_stradale }}</div></div>
+                <div class="row"><div class="col-md-3 key">Distretto:</div><div class="col-md-9">{{ ponte.distretto }}</div></div>
+                <div class="row"><div class="col-md-3 key">Proprietario:</div><div class="col-md-9">{{ ponte.proprietario }}</div></div>
+            </div>
+            <!-- Vincoli -->
+            <div class="tab-pane fade" id="vincoli" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Classificazione Sismica 2025:</div><div class="col-md-9">{{ ponte.classificazione_sismica_2025 }}</div></div>
+                <div class="row"><div class="col-md-3 key">Sismicità Area (ag/g Tr=475):</div><div class="col-md-9">{{ ponte.sismicita_area_ag_g_tr475 }}</div></div>
+                <div class="row"><div class="col-md-3 key">Classi Conseguenza:</div><div class="col-md-9">{{ ponte.classi_conseguenza }}</div></div>
+                <div class="row"><div class="col-md-3 key">PRP 2004:</div><div class="col-md-9">{{ ponte.prp_2004 }}</div></div>
+                <div class="row"><div class="col-md-3 key">PSDA Rischio Idraulico:</div><div class="col-md-9">{{ ponte.psda_rischio_idraulico }}</div></div>
+                <div class="row"><div class="col-md-3 key">PAI Rischio Frane:</div><div class="col-md-9">{{ ponte.pai_rischio_frane }}</div></div>
+            </div>
+            <!-- Ispezioni -->
+            <div class="tab-pane fade" id="ispezioni" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">N. Ispezioni Effettuate:</div><div class="col-md-9">{{ ponte.n_ispezioni_effettuate }}</div></div>
+                <div class="row"><div class="col-md-3 key">Data Ultima Ispezione:</div><div class="col-md-9">{{ ponte.data_ultima_ispezione }}</div></div>
+                <div class="row"><div class="col-md-3 key">Stato Opera:</div><div class="col-md-9">{{ ponte.stato_opera }}</div></div>
+            </div>
+            <!-- Morfologia -->
+            <div class="tab-pane fade" id="morfologia" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Fenomeni Erosivi:</div><div class="col-md-9">{{ ponte.fenomeni_erosivi }}</div></div>
+                <div class="row"><div class="col-md-3 key">Fenomeni Franosi:</div><div class="col-md-9">{{ ponte.fenomeni_franosi }}</div></div>
+                <div class="row"><div class="col-md-3 key">Morfologia Sito:</div><div class="col-md-9">{{ ponte.morfologia_sito }}</div></div>
+            </div>
+            <!-- Appoggi -->
+            <div class="tab-pane fade" id="appoggi" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Tipologia Giunti:</div><div class="col-md-9">{{ ponte.tipologia_giunti }}</div></div>
+                <div class="row"><div class="col-md-3 key">N. Totale Giunti:</div><div class="col-md-9">{{ ponte.n_totale_giunti }}</div></div>
+                <div class="row"><div class="col-md-3 key">Lungh. Giunto Spalla:</div><div class="col-md-9">{{ ponte.lungh_giunto_spalla }}</div></div>
+                <div class="row"><div class="col-md-3 key">Lungh. Giunto Pila:</div><div class="col-md-9">{{ ponte.lungh_giunto_pila }}</div></div>
+                <div class="row"><div class="col-md-3 key">Apparecchi di Appoggio:</div><div class="col-md-9">{{ ponte.apparecchi_di_appoggio }}</div></div>
+            </div>
+            <!-- Interventi -->
+            <div class="tab-pane fade" id="interventi" role="tabpanel">
+                <div class="row"><div class="col-md-3 key">Interventi Strutturali Eseguiti:</div><div class="col-md-9">{{ ponte.interventi_strutturali_eseguiti }}</div></div>
+                <div class="row"><div class="col-md-3 key">Descrizione Interventi:</div><div class="col-md-9">{{ ponte.descrizione_interventi_strutturali }}</div></div>
+                <div class="row"><div class="col-md-3 key">Limitazione di Carico:</div><div class="col-md-9">{{ ponte.limitazione_di_carico }}</div></div>
+            </div>
+            <!-- Foto -->
+            <div class="tab-pane fade" id="foto" role="tabpanel">
+                <p><strong>Path Lizmap:</strong> {{ ponte.foto_path_lizmap }}</p>
+                <p><strong>Path Foto:</strong> {{ ponte.foto_path }}</p>
+                <!--
+                NOTA: Per visualizzare le immagini, i percorsi sopra devono essere accessibili dal web.
+                Se sono percorsi di file locali sul server, è necessario servirli tramite una route Flask
+                e costruire l'URL appropriato qui. Ad esempio:
+                <img src="{{ url_for('static', filename='immagini_ponti/' + ponte.n_ponte + '.jpg') }}" alt="Foto del ponte">
+                -->
+            </div>
+            <!-- Inquadramento -->
+            <div class="tab-pane fade" id="inquadramento" role="tabpanel">
+                {% if ponte.link_google_maps %}
+                    <iframe src="{{ ponte.link_google_maps }}"></iframe>
+                {% else %}
+                    <p>Link a Google Maps non disponibile.</p>
+                {% endif %}
+            </div>
+            <!-- StreetView -->
+            <div class="tab-pane fade" id="streetview" role="tabpanel">
+                {% if ponte.link_streetview %}
+                    <iframe src="{{ ponte.link_streetview }}"></iframe>
+                {% else %}
+                    <p>Link a StreetView non disponibile.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
